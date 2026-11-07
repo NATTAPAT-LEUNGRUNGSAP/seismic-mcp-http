@@ -1,0 +1,17 @@
+services:
+  seismic-mcp:
+    build: .
+    image: seismic-mcp-server:0.1.0
+    container_name: seismic-mcp
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Bangkok
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "8000"
+      LOG_LEVEL: INFO
+      TMD_UID:
+      TMD_UKEY:
+    # Bound to localhost only: the server has no authentication.
+    # Change to "8000:8000" only if you put auth / a reverse proxy in front.
+    ports:
+      - "127.0.0.1:8000:8000"
